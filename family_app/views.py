@@ -4,9 +4,12 @@ from rest_framework.views import APIView
 from collections import deque
 from .models import Member, Relationship
 from .serializers import MemberSerializer, RelationshipSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class MemberView(APIView):
+
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         members = Member.objects.all()
@@ -61,6 +64,8 @@ class MemberDetailView(APIView):
 
 class RelationshipView(APIView):
 
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         relationships = Relationship.objects.all()
         serializer = RelationshipSerializer(relationships, many=True)
@@ -75,6 +80,7 @@ class RelationshipView(APIView):
 
 
 class PathApiView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         from_member_id = request.query_params.get("from_member_id")
@@ -130,4 +136,3 @@ class PathApiView(APIView):
                     queue.append(new_path)
 
         return paths
-
