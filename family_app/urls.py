@@ -8,7 +8,7 @@ from .views import (
 
 urlpatterns = [
     path("members/", MemberView.as_view(), name="member-list-create"),
-    path("members/<int:pk>/", MemberDetailView.as_view(), name="member-detail"),
+    path("members/<str:pk>/", MemberDetailView.as_view(), name="member-detail"),
     path("relationships/", RelationshipView.as_view(), name="relationship-list-create"),
     path("find_paths/", PathApiView.as_view(), name="find-paths"),
 ]
